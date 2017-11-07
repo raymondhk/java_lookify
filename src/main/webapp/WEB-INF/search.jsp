@@ -22,28 +22,29 @@
 						<a class="navbar-brand" href="/dashboard">Lookify</a>
 					</div>
 						<ul class="nav navbar-nav">
-							<li><a href="/songs/new">Add New</a></li>
+							<li class="active"><a href="/songs/new/">Add New</a></li>
 							<li><a href="/search/topTen">Top Songs</a></li>
 						</ul>
-					<form method="POST" action="/search" class="navbar-form navbar-left pull-right">
-						<div class="form-group">
-							<input type="text" id="searchText" class="form-control" placeholder="Artist Name" name="artist">
-						</div>
-						<button type="submit" class="btn btn-default">Search Artist</button>
-					</form>
+						<form method="POST" action="/search" class="navbar-form navbar-left pull-right">
+							<div class="form-group">
+								<input type="text" id="searchText" class="form-control" placeholder="Artist Name" name="artist">
+							</div>
+							<button type="submit" class="btn btn-default">Search Artist</button>
+						</form>
 				</div>
 			</nav>
-			<div class="row">
+			<div class="row main-header">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<h5>All Songs:</h5>
+					<h5>Songs by Artist: <c:out value="${artist}"/></h5>
 				</div>
 				<div class="col-md-2"></div>
 			</div>
+			<br>
 			<div class="row main">
 				<div class="col-md-2"></div>
 				<div class="col-md-8">
-					<table class="table table-hover">
+					<table class="table">
 						<thead>
 							<tr>
 								<th>Name</th>
@@ -54,7 +55,7 @@
 						<tbody>
 							<c:forEach items="${songs}" var="song">
 								<tr>
-									<td><a href="/songs/${song.id}">${song.title}</a></td>
+									<td>${song.title}</td>
 									<td>${song.rating}</td>
 									<td><a href="/songs/delete/${song.id}">Delete</a></td>
 								</tr>

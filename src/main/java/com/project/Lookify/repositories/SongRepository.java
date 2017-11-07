@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface SongRepository extends CrudRepository<Song,Long>{
 	// Query methods go here.
 	List<Song> findAll();
-	// List<Song> findByArtist(String search);
+	List<Song> findByArtistContaining(String artist);
 	List<Song> findTop10ByOrderByRatingDesc();
 	// Example:
 	// public YourModelHere findByName(String name);

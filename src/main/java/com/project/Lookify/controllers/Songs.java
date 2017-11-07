@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.Lookify.models.Song;
 import com.project.Lookify.services.SongService;
@@ -67,5 +68,20 @@ public class Songs{
 		List<Song> songs = songService.topTen();
 		model.addAttribute("songs", songs);
 		return "top";
+	}
+	@RequestMapping(value="/search", method=RequestMethod.POST)
+	public String search(@RequestParam("artist") String artist) {
+		return "redirect:/search/".concat(artist);
 	} 	
+	@RequestMapping("/search/{artist}")
+	public String searchResult(@PathVariable("artist") String artist, Model model) {
+		model.addAttribute("artist", artist);
+		List<Song> songs = songService.searchByArtist(artist);
+		if(songs.isEmpty()) {
+			return "redirect:/dashboard";
+		} else {
+			model.addAttribute("songs", songs);
+			return "search";
+		}
+	}
 }
